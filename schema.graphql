@@ -1,0 +1,71 @@
+schema {
+    query: Query
+}
+
+scalar DateTime
+
+type Query {
+    person(id: ID! @path): Person! @rest
+    account(id: ID! @path): Account! @rest
+    user(id: ID! @path): User! @rest
+    # shift(id: ID! @path): Shift!
+    # location(id: ID! @path): Location!
+}
+
+type Person @restBase(type: "Query", query: "person") {
+    id: ID!
+    users: [User!]! @rest
+}
+
+type Account @restBase(type: "Query", query: "account") {
+    id: ID!
+    plan: Plan! @rest
+    users: [User!]! @rest
+    usersByType(type: UserType!): [User!]! @rest
+    # shifts(start: DateTime, end: DateTime): [Shift!]! @route
+}
+
+type User @restBase(type: "Query", query: "user") {
+    id: ID!
+    person: Person! @rest
+    account: Account! @rest
+    type: UserType!
+    # locations: [Location!]! @rest
+    # shifts(start: DateTime, end: DateTime): [Shift!]! @rest
+}
+enum UserType {
+    ACCOUNT_HOLDER
+    MANAGER
+    SUPERVISOR
+    EMPLOYEE
+}
+
+# type Shift @resource(primaryKey: "id") {
+#     id: ID!
+#     user: User! @route
+#     account: Account! @route
+# }
+
+# type Location @resource(primaryKey: "id") {
+#     id: ID!
+# }
+
+type Plan {
+    name: String!
+}
+
+# Routes:
+# /person/{id}
+# /person/{id}/users
+# /account/{id}
+# /account/{id}/users
+# /account/{id}/shifts?start=foo&end=foo
+# /user/{id}
+# /user/{id}/person
+# /user/{id}/account
+# /user/{id}/locations
+# /user/{id}/shifts?start=foo&end=foo
+# /shift/{id}
+# /shift/{id}/user
+# /shift/{id}/account
+# /location/{id}
