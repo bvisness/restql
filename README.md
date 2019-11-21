@@ -4,14 +4,14 @@ A GraphQL API that serves its data through REST as well.
 
 ## Starting the server
 
-First run `dep ensure` to make sure your dependencies are up to date. Then just `go run main.go`.
+Just `go run main.go`.
 
 Once it's running, you should be able to point [GraphiQL](https://github.com/skevy/graphiql-app) at
 http://localhost:8080/graphql and use http://localhost:8080/<whatever> for all REST requests.
 
 ## How does it work?
 
-Take a look at [schema3.graphql](schema3.graphql). This uses GraphQL's schema language to define the schema of our API.
+Take a look at [schema.graphql](schema.graphql). This uses GraphQL's schema language to define the schema of our API.
 Notice the extra annotations (or "directives") on some of the objects and fields: @rest, @path, and @restBase.
 
 ### @rest
