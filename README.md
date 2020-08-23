@@ -1,6 +1,6 @@
 # RestQL
 
-A GraphQL API that serves its data through REST as well.
+An experimental GraphQL API that serves its data through REST as well.
 
 ## Starting the server
 
